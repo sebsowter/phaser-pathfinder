@@ -21,16 +21,8 @@ export default class PathfinderScene extends Phaser.Scene {
     this.paths = this.add.group({
       classType: Phaser.GameObjects.Image,
       defaultKey: 'tiles',
-      defaultFrame: 2,
-      active: true,
-      //maxSize: -1,
-      //runChildUpdate: false,
-      //createCallback: null,
-      //removeCallback: null,
-      //createMultipleCallback: null
+      defaultFrame: 2
     });
-    //this.paths.clear();
-    //this.paths.create(28, 44);
 
     const red = this.add.image(4, 4, 'tiles', 4).setInteractive();
     const blue = this.add.image(44, 28, 'tiles', 5).setInteractive();
