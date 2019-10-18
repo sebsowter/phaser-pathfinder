@@ -4,7 +4,7 @@ Find the shortest path around obsticles.
 
 View the [demo](https://sebsowter.github.io/phaser-pathfinder/).
 
-![Pathfinder](https://user-images.githubusercontent.com/7384630/67064590-0174d100-f163-11e9-9b7b-aca28c877ebd.png)
+![Pathfinder](https://user-images.githubusercontent.com/7384630/67064895-287fd280-f164-11e9-96d4-02265128b14b.png)
 
 ## Installation
 

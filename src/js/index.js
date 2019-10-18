@@ -5,7 +5,7 @@ const config = {
   type: Phaser.AUTO,
   width: 128,
   height: 128,
-  zoom: 4,
+  zoom: 2,
   pixelArt: true,
   scene: PathfinderScene
 };
