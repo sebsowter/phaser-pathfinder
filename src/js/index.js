@@ -4,7 +4,7 @@ import PathFinderScene from './PathFinderScene';
 const config = {
   type: Phaser.AUTO,
   width: 128,
-  height: 96,
+  height: 128,
   zoom: 4,
   pixelArt: true,
   scene: PathFinderScene
