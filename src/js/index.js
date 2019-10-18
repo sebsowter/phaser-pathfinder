@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import PathFinderScene from './PathFinderScene';
+import PathfinderScene from './PathfinderScene';
 
 const config = {
   type: Phaser.AUTO,
@@ -7,7 +7,7 @@ const config = {
   height: 128,
   zoom: 4,
   pixelArt: true,
-  scene: PathFinderScene
+  scene: PathfinderScene
 };
 
 const game = new Phaser.Game(config);
