@@ -18,6 +18,20 @@ export default class PathfinderScene extends Phaser.Scene {
     const tileset = tilemap.addTilesetImage('tiles');
     const layer = tilemap.createDynamicLayer(0, tileset, 0, 0);
 
+    this.paths = this.add.group({
+      classType: Phaser.GameObjects.Image,
+      defaultKey: 'tiles',
+      defaultFrame: 2,
+      active: true,
+      //maxSize: -1,
+      //runChildUpdate: false,
+      //createCallback: null,
+      //removeCallback: null,
+      //createMultipleCallback: null
+    });
+    //this.paths.clear();
+    //this.paths.create(28, 44);
+
     const red = this.add.image(4, 4, 'tiles', 4).setInteractive();
     const blue = this.add.image(44, 28, 'tiles', 5).setInteractive();
     
@@ -51,12 +65,10 @@ export default class PathfinderScene extends Phaser.Scene {
   }
 
   updateTiles(path) {
-    this.tiles.forEach((row, y) => {
-      row.forEach((tile, x) => {
-        const found = path.some((p) => p.gridX === x && p.gridY === y);
+    this.paths.clear(true, true);
 
-        tile.setAlpha(found ? 0.75 : 1);
-      });
+    path.forEach((node) => {
+      this.paths.create(node.gridX * 8 + 4, node.gridY * 8 + 4);
     });
   }
 

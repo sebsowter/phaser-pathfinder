@@ -1,14 +1,10 @@
-# Phaser 3 Webpack Boilerplate
+# Phaser 3 Pathfinder
 
-Get up and running with Phaser 3 using JavaScript ES6.
+Find the shortest path around obsticles.
 
-This Webpack setup takes care of your code bundling and local development server.
+View the [demo](https://sebsowter.github.io/phaser-pathfinder/).
 
-Included are some handy class files, extending Phaser 3's Scene and Sprite base classes.
-
-View the [demo](https://sebsowter.github.io/phaser-webpack/).
-
-![Mario](https://user-images.githubusercontent.com/7384630/55728490-1205fb00-5a0c-11e9-9fca-67641df3549b.jpg)
+![Pathfinder](https://user-images.githubusercontent.com/7384630/67064590-0174d100-f163-11e9-9b7b-aca28c877ebd.png)
 
 ## Installation
 
