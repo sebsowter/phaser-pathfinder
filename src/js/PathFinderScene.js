@@ -17,54 +17,51 @@ export default class PathfinderScene extends Phaser.Scene {
     });
     const tileset = tilemap.addTilesetImage('tiles');
     const layer = tilemap.createDynamicLayer(0, tileset, 0, 0);
-
-    this.paths = this.add.group({
+    const paths = this.add.group({
       classType: Phaser.GameObjects.Image,
       defaultKey: 'tiles',
       defaultFrame: 2
     });
-
     const red = this.add.image(4, 4, 'tiles', 4).setInteractive();
     const blue = this.add.image(44, 28, 'tiles', 5).setInteractive();
-    
-    this.tiles = tilemap.layers[0].data;
-
-    console.log('tiles', this.tiles);
-    console.log('layer', layer);
-
-    const tilesNew = this.tiles.map((row) => row.map((tile) => tile.index));
+    const tiles = tilemap.layers[0].data;
+    const tilesNew = tiles.map((row) => row.map((tile) => tile.index === 3));
     const pathFinder = new Pathfinder(tilesNew);
 
-    this.tilecurrent = null;
+    console.log('tiles', tiles);
+    console.log('layer', layer);
+
+    let tilecurrent = null;
 
     this.input.setDraggable(red);
     this.input.setDraggable(blue);
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       const tile = tilemap.getTileAtWorldXY(dragX, dragY, true, camera, layer);
 
-      if (tile && tile.index !== 3 && tile !== this.tilecurrent) { 
-        this.tilecurrent = tile;       
-        gameObject.x = this.roundValue(dragX);
-        gameObject.y = this.roundValue(dragY);
+      if (tile && tile.index !== 3 && tile !== tilecurrent) { 
+        tilecurrent = tile;
+
+        gameObject.x = this.pointToGrid(dragX);
+        gameObject.y = this.pointToGrid(dragY);
 
         const pointA = new Phaser.Geom.Point(red.x, red.y);
         const pointB = new Phaser.Geom.Point(blue.x, blue.y);
         const path = pathFinder.getPath(pointA, pointB);
 
-        this.updateTiles(path);
+        paths.clear(true, true);
+
+        path.forEach((point) => {
+          paths.create(this.gridToPoint(point.x), this.gridToPoint(point.y));
+        });
       }
     });
   }
 
-  updateTiles(path) {
-    this.paths.clear(true, true);
-
-    path.forEach((node) => {
-      this.paths.create(node.gridX * 8 + 4, node.gridY * 8 + 4);
-    });
+  gridToPoint(value) {
+    return value * 8 + 4;
   }
 
-  roundValue(value) {
+  pointToGrid(value) {
     return Math.floor(value / 8) * 8 + 4;
   }
 }
