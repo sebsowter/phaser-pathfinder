@@ -32,8 +32,8 @@ export default class PathfinderScene extends Phaser.Scene {
       defaultFrame: 2
     });
     this.lineGraphics = this.add.graphics().lineStyle(1, 0x999900, 1).setDepth(1);
-    this.red = this.add.image(4, 4, 'tiles', 4).setInteractive().setDepth(2);
-    this.blue = this.add.image(44, 28, 'tiles', 5).setInteractive().setDepth(2);
+    this.red = this.add.image(20, 20, 'tiles', 4).setInteractive().setDepth(2);
+    this.blue = this.add.image(108, 108, 'tiles', 5).setInteractive().setDepth(2);
     this.pathFinder = new Pathfinder(tiles, 8, 8);
 
     let tilecurrent = null;

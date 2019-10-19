@@ -13,9 +13,6 @@ class PathfinderNode {
   }
 }
 
-/**
- * 
- */
 export default class Pathfinder {
   constructor(tiles, tileHeight, tileWidth) {
     this.tileHeight = tileHeight || 16;
