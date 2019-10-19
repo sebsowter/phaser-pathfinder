@@ -17,51 +17,62 @@ export default class PathfinderScene extends Phaser.Scene {
     });
     const tileset = tilemap.addTilesetImage('tiles');
     const layer = tilemap.createDynamicLayer(0, tileset, 0, 0);
-    const paths = this.add.group({
+    const tiles = tilemap.layers[0].data.map(function(row) {
+      return row.map(function(tile) {
+        return tile.index !== 3;
+      });
+    });
+    const snapToGrid = function(value) {
+      return Math.floor(value / 8) * 8 + 4;
+    };
+    
+    this.pathGroup = this.add.group({
       classType: Phaser.GameObjects.Image,
       defaultKey: 'tiles',
       defaultFrame: 2
     });
-    const red = this.add.image(4, 4, 'tiles', 4).setInteractive();
-    const blue = this.add.image(44, 28, 'tiles', 5).setInteractive();
-    const tiles = tilemap.layers[0].data;
-    const tilesNew = tiles.map((row) => row.map((tile) => tile.index === 3));
-    const pathFinder = new Pathfinder(tilesNew);
-
-    console.log('tiles', tiles);
-    console.log('layer', layer);
+    this.lineGraphics = this.add.graphics().lineStyle(1, 0x999900, 1).setDepth(1);
+    this.red = this.add.image(4, 4, 'tiles', 4).setInteractive().setDepth(2);
+    this.blue = this.add.image(44, 28, 'tiles', 5).setInteractive().setDepth(2);
+    this.pathFinder = new Pathfinder(tiles, 8, 8);
 
     let tilecurrent = null;
 
-    this.input.setDraggable(red);
-    this.input.setDraggable(blue);
+    this.input.setDraggable(this.red);
+    this.input.setDraggable(this.blue);
     this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       const tile = tilemap.getTileAtWorldXY(dragX, dragY, true, camera, layer);
 
-      if (tile && tile.index !== 3 && tile !== tilecurrent) { 
+      if (tile && tile !== tilecurrent && tile.index !== 3) {
         tilecurrent = tile;
+        
+        gameObject.x = snapToGrid(dragX);
+        gameObject.y = snapToGrid(dragY);
 
-        gameObject.x = this.pointToGrid(dragX);
-        gameObject.y = this.pointToGrid(dragY);
-
-        const pointA = new Phaser.Geom.Point(red.x, red.y);
-        const pointB = new Phaser.Geom.Point(blue.x, blue.y);
-        const path = pathFinder.getPath(pointA, pointB);
-
-        paths.clear(true, true);
-
-        path.forEach((point) => {
-          paths.create(this.gridToPoint(point.x), this.gridToPoint(point.y));
-        });
+        this.drawPath();
       }
     });
-  }
 
-  gridToPoint(value) {
-    return value * 8 + 4;
+    this.drawPath(true);
   }
+  
+  drawPath(noClear) {
+    const pointA = new Phaser.Geom.Point(this.red.x, this.red.y);
+    const pointB = new Phaser.Geom.Point(this.blue.x, this.blue.y);
+    const path = this.pathFinder.getPath(pointA, pointB);
+    
+    if (!noClear) {
+      this.lineGraphics.clear();
+      this.pathGroup.clear(true, true);
+    }
 
-  pointToGrid(value) {
-    return Math.floor(value / 8) * 8 + 4;
+    this.lineGraphics.moveTo(pointA.x, pointA.y);
+
+    path.forEach((point) => {
+      this.pathGroup.create(point.x, point.y);
+      this.lineGraphics.lineTo(point.x, point.y);
+    });
+
+    this.lineGraphics.strokePath();
   }
 }

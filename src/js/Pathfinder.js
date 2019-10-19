@@ -1,11 +1,11 @@
 class PathfinderNode {
-  constructor(gridX, gridY, isWall) {
+  constructor(gridX, gridY, isWalkable) {
     this.gridX = gridX;
     this.gridY = gridY;
     this.hCost = 0;
     this.gCost = 0;
     this.parent = null;
-    this.isWall = isWall;
+    this.isWalkable = isWalkable;
   }
 
   get fCost() {
@@ -13,22 +13,25 @@ class PathfinderNode {
   }
 }
 
+/**
+ * 
+ */
 export default class Pathfinder {
   constructor(tiles, tileHeight, tileWidth) {
-    this.tileHeight = tileHeight || 8;
-    this.tileWidth = tileWidth || 8;
+    this.tileHeight = tileHeight || 16;
+    this.tileWidth = tileWidth || 16;
     this.lengthY = tiles.length;
     this.lengthX = tiles[0].length;
     this.nodes = tiles.map(function(row, y) {
-      return row.map(function(isWall, x) {
-        return new PathfinderNode(x, y, isWall);
+      return row.map(function(isWalkable, x) {
+        return new PathfinderNode(x, y, isWalkable);
       });
     });
   }
 
   getPath(pointA, pointB) {
-    const startNode = this.getNodeByWorldXY(pointA.x, pointA.y);
-    const targetNode = this.getNodeByWorldXY(pointB.x, pointB.y);
+    const startNode = this.getNodeFromXY(pointA.x, pointA.y);
+    const targetNode = this.getNodeFromXY(pointB.x, pointB.y);
     const deadNodes = [];
     const liveNodes = [startNode];
     
@@ -51,7 +54,7 @@ export default class Pathfinder {
       }
 
       this.getNeighbours(currentNode).forEach((neighbour) => {
-        if (!neighbour.isWall && !deadNodes.includes(neighbour)) {
+        if (neighbour.isWalkable && !deadNodes.includes(neighbour)) {
           const newCost = currentNode.gCost + this.getDistance(currentNode, neighbour);
 
           if (newCost < neighbour.gCost || !liveNodes.includes(neighbour)) {
@@ -75,14 +78,14 @@ export default class Pathfinder {
   
     while (currentNode !== nodeA) {
       path.push({
-        x: currentNode.gridX,
-        y: currentNode.gridY
+        x: (currentNode.gridX * this.tileWidth) + (this.tileWidth / 2),
+        y: (currentNode.gridY * this.tileHeight) + (this.tileHeight / 2)
       });
   
       currentNode = currentNode.parent;
     }
 
-    path.reverse().pop();
+    path.reverse();
   
     return path;
   }
@@ -108,11 +111,11 @@ export default class Pathfinder {
     return neighbours;
   }
   
-  getNodeByWorldXY(x, y) {
+  getNodeFromXY(x, y) {
     const gridX = Math.floor(x / this.tileWidth);
     const gridY = Math.floor(y / this.tileHeight);
   
-    return this.nodes[gridY][gridX];
+    return this.nodes[gridY][gridX] || null;
   }
   
   getDistance(nodeA, nodeB) {
@@ -122,10 +125,13 @@ export default class Pathfinder {
     if (distX > distY) {
       return this.calcDistance(distY, distX);
     }
-  
+    
     return this.calcDistance(distX, distY);
   }
-  
+
+  /**
+   * 
+   */
   calcDistance(a, b) {
     return (14 * a) + (10 * (b - a));
   }
