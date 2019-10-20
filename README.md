@@ -2,7 +2,7 @@
 
 Find the shortest path between two points using the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 
-![Pathfinder](https://user-images.githubusercontent.com/7384630/67165300-6276f180-f37b-11e9-895a-7286e05231f9.gif)
+![Pathfinder](https://user-images.githubusercontent.com/7384630/67165375-fba60800-f37b-11e9-9124-9c52b7500690.gif)
 
 Inspired by [Sebastian Lague's coding tutorial on pathfinding](https://www.youtube.com/watch?v=-L-WgKMFuhE).
 
