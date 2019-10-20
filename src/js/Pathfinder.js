@@ -125,10 +125,7 @@ export default class Pathfinder {
     
     return this.calcDistance(distX, distY);
   }
-
-  /**
-   * 
-   */
+  
   calcDistance(a, b) {
     return (14 * a) + (10 * (b - a));
   }
