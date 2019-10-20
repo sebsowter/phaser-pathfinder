@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Pathfinder from './Pathfinder';
+import Pathfinder from './Pathginder';
 
 export default class PathfinderScene extends Phaser.Scene {
   preload() {

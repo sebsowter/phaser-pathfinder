@@ -1,8 +1,8 @@
 # Phaser 3 Pathfinder
 
-Find the shortest path between two points using the A* algorithm.
+Find the shortest path between two points using the [A* algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 
-![Pathfinder](https://user-images.githubusercontent.com/7384630/67064895-287fd280-f164-11e9-96d4-02265128b14b.png)
+![Pathfinder](https://user-images.githubusercontent.com/7384630/67165300-6276f180-f37b-11e9-895a-7286e05231f9.gif)
 
 Inspired by [Sebastian Lague's coding tutorial on pathfinding](https://www.youtube.com/watch?v=-L-WgKMFuhE).
 
