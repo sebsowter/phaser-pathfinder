@@ -6,7 +6,7 @@ Find the shortest path between two points using the [A* algorithm](https://en.wi
 
 Inspired by Sebastian Lague's [coding tutorial on pathfinding](https://www.youtube.com/watch?v=-L-WgKMFuhE).
 
-View the [demo](https://sebsowter.github.io/phaser-pathfinder/index.html).
+View the [demo](https://sebsowter.github.io/phaser-pathfinder/).
 
 ## Installation
 
