@@ -66,6 +66,8 @@ export default class Pathfinder {
         }
       });
     }
+
+    return null;
   }
 
   tracePath(nodeA, nodeB) {
