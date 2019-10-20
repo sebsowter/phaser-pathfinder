@@ -53,15 +53,15 @@ export default class PathfinderScene extends Phaser.Scene {
       }
     });
 
-    this.drawPath(true);
+    this.drawPath(false);
   }
   
-  drawPath(noClear) {
+  drawPath(clear = true) {
     const pointA = new Phaser.Geom.Point(this.red.x, this.red.y);
     const pointB = new Phaser.Geom.Point(this.blue.x, this.blue.y);
     const path = this.pathFinder.getPath(pointA, pointB);
     
-    if (!noClear) {
+    if (clear) {
       this.lineGraphics.clear();
       this.pathGroup.clear(true, true);
     }
