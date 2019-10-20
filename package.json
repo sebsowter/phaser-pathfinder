@@ -21,7 +21,7 @@
       "@babel/preset-env"
     ]
   },
-  "homepage": "https://github.com/sebsowter/phaser-pathfinder#readme",
+  "homepage": "https://sebsowter.github.io/phaser-pathfinder/",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
