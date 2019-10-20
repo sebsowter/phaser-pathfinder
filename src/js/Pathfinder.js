@@ -14,9 +14,9 @@ class PathfinderNode {
 }
 
 export default class Pathfinder {
-  constructor(tiles, tileHeight, tileWidth) {
-    this.tileHeight = tileHeight || 16;
+  constructor(tiles, tileWidth, tileHeight) {
     this.tileWidth = tileWidth || 16;
+    this.tileHeight = tileHeight || 16;
     this.lengthY = tiles.length;
     this.lengthX = tiles[0].length;
     this.nodes = tiles.map(function(row, y) {
@@ -52,10 +52,10 @@ export default class Pathfinder {
 
       this.getNeighbours(currentNode).forEach((neighbour) => {
         if (neighbour.isWalkable && !deadNodes.includes(neighbour)) {
-          const newCost = currentNode.gCost + this.getDistance(currentNode, neighbour);
+          const cost = currentNode.gCost + this.getDistance(currentNode, neighbour);
 
-          if (newCost < neighbour.gCost || !liveNodes.includes(neighbour)) {
-            neighbour.gCost = newCost;
+          if (cost < neighbour.gCost || !liveNodes.includes(neighbour)) {
+            neighbour.gCost = cost;
             neighbour.hCost = this.getDistance(neighbour, targetNode);
             neighbour.parent = currentNode;
 
