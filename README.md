@@ -4,7 +4,7 @@ Find the shortest path between two points using the [A* algorithm](https://en.wi
 
 ![Pathfinder](https://user-images.githubusercontent.com/7384630/67165375-fba60800-f37b-11e9-9124-9c52b7500690.gif)
 
-Inspired by [Sebastian Lague's coding tutorial on pathfinding](https://www.youtube.com/watch?v=-L-WgKMFuhE).
+Inspired by Sebastian Lague's [coding tutorial on pathfinding](https://www.youtube.com/watch?v=-L-WgKMFuhE).
 
 View the [demo](https://sebsowter.github.io/phaser-pathfinder/).
 
