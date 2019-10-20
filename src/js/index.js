@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import PathfinderScene from './PathbinderScene';
+import PathfinderScene from './PathfinderScene';
 
 const config = {
   type: Phaser.AUTO,
