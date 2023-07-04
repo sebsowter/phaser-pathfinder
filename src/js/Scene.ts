@@ -17,15 +17,10 @@ export class Scene extends Phaser.Scene {
     const tilemap = this.make.tilemap({ key: "tilemap" });
     const tileset = tilemap.addTilesetImage("tiles");
     const layer = tilemap.createLayer(0, tileset, 0, 0);
-    const tiles = tilemap.layers[0].data.map((row) => {
-      return row.map(function (tile) {
-        return tile.index !== 3;
-      });
-    });
+    console.log("layer", layer);
+    const tiles = tilemap.layers[0].data.map((row) => row.map((tile) => tile.index !== 4));
 
-    const snapToGrid = function (value) {
-      return Math.floor(value / 8) * 8 + 4;
-    };
+    const snapToGrid = (value: number) => Math.floor(value / 8) * 8 + 4;
 
     this.pathGroup = this.add.group({
       classType: Phaser.GameObjects.Image,
