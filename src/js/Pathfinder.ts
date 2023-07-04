@@ -183,7 +183,7 @@ export class Pathfinder {
     const gridX = Math.floor(x / this._tileWidth);
     const gridY = Math.floor(y / this._tileHeight);
 
-    return this._nodes[gridY]?.[gridX] ?? null;
+    return this._nodes[gridY][gridX] ?? null;
   }
 
   private getDistance(nodeA: PathfinderNode, nodeB: PathfinderNode) {
